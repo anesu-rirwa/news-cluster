@@ -1,5 +1,7 @@
 # Document Clustering App
 
+## Rirwa Anesu R204432D HAI 
+
 This Streamlit application clusters news articles into categories based on their content. It uses K-means clustering to group similar articles together.
 
 ## How to Use
