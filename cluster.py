@@ -1,15 +1,14 @@
 import pandas as pd
 import re
 import streamlit as st
-
-import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
-
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
+
+# Load NLTK resources
+nltk_data_path = "./nltk_data"  # Update this with your NLTK data directory path
+stopwords.ensure_loaded()
 
 # Load data
 data = pd.read_csv('all_articles.csv')
