@@ -1,24 +1,25 @@
-import os
 import pandas as pd
 import re
 import streamlit as st
-import requests
-import io
-import zipfile
 import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
+import os
 
-# Function to download and extract NLTK data from GitHub repository
-def download_nltk_data():
-    nltk_data_url = 'https://github.com/anesu-rirwa/news-cluster/nltk_data.zip'
-    response = requests.get(nltk_data_url)
-    with zipfile.ZipFile(io.BytesIO(response.content)) as z:
-        z.extractall('/tmp/nltk_data')  # Extract NLTK data to a temporary directory
+# Specify the path to the directory where NLTK data will be stored
+nltk_data_path = os.path.join(os.getcwd(), "nltk_data")
 
-# Download NLTK data
-download_nltk_data()
+# Ensure that the directory exists
+os.makedirs(nltk_data_path, exist_ok=True)
 
 # Set NLTK data path
-nltk.data.path.append('/tmp/nltk_data/nltk_data')
+nltk.data.path.append(nltk_data_path)
+
+# Download NLTK resources
+nltk.download('stopwords', download_dir=nltk_data_path)
+nltk.download('punkt', download_dir=nltk_data_path)
 
 # Load data
 data = pd.read_csv('all_articles.csv')
